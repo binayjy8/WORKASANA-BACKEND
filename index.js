@@ -5,8 +5,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { initializeDatabase } = require("./config/db");
 
-initializeDatabase();
-
 const projectRoutes = require("./routes/projectRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const taskRoutes = require("./routes/taskRoutes");
@@ -15,6 +13,18 @@ const authRoutes = require("./routes/authRoutes");
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api", async (req, res, next) => {
+  try {
+    await initializeDatabase();
+    next();
+  } catch (error) {
+    res.status(500).json({
+      message: "Database connection failed",
+      error: error.message,
+    });
+  }
+});
 
 app.use("/api/projects", projectRoutes);
 app.use("/api/auth", authRoutes);
