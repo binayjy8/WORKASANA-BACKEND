@@ -52,12 +52,12 @@ const createTask = async (req, res) => {
     try {
         const {
             name, project, team, owners, tags,
-            timeToComplete, status, dueDate, priority, assignee
+            timeToComplete, status, dueDate, priority
         } = req.body;
 
         const newTask = await Task.create({
             name, project, team, owners, tags,
-            timeToComplete, status, dueDate, priority, assignee
+            timeToComplete, status, dueDate, priority
         });
 
         
@@ -77,12 +77,12 @@ const updateTask = async (req, res) => {
         const { id } = req.params;
         const {
             name, project, team, owners, tags,
-            timeToComplete, status, dueDate, priority, assignee
+            timeToComplete, status, dueDate, priority
         } = req.body;
 
         const updatedTask = await Task.findByIdAndUpdate(
             id,
-            { name, project, team, owners, tags, timeToComplete, status, dueDate, priority, assignee },
+            { name, project, team, owners, tags, timeToComplete, status, dueDate, priority },
             { new: true, runValidators: true }
         )
         

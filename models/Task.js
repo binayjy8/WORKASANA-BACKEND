@@ -33,11 +33,6 @@ const taskSchema = new mongoose.Schema(
       },
     ],
 
-    assignee: {
-      type: String,
-      default: "",
-    },
-
     priority: {
       type: String,
       enum: ["Low", "Medium", "High"],
@@ -45,8 +40,7 @@ const taskSchema = new mongoose.Schema(
     },
 
     dueDate: {
-      type: String,
-      default: "",
+      type: Date,
     },
 
     timeToComplete: {
